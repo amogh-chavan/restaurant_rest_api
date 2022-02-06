@@ -13,13 +13,12 @@ export default class RestaurantController {
 
     @Get("/details")
     public async getDetails() {
-        // console.log("query params: ", veg_only, cost, cusine_types, isOpen);
         return await this.restaurantService.details();
     }
 
     @Get("/details/:id")
     public async findOneById(id: string) {
-        return await this.restaurantService.findOneById(id);
+        return await this.restaurantService.findOneById(+id);
     }
 
     @Post("/filter")
@@ -34,7 +33,7 @@ export default class RestaurantController {
 
     @Delete("/delete/:id")
     public async deleteRestaurant(id: string) {
-        return await this.restaurantService.deleteRestaurant(id);
+        return await this.restaurantService.deleteRestaurant(+id);
     }
 
 }

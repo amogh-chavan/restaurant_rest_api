@@ -11,7 +11,7 @@ const restaurant = sequelizeConnection.define('restaurant', {
     },
     restaurant_name: {
         type: DataTypes.STRING,
-        // unique: true,
+        unique: false,
         allowNull: false
     },
     address: {
@@ -27,7 +27,7 @@ const restaurant = sequelizeConnection.define('restaurant', {
         allowNull: false
     },
     cusine_types: {
-        type: DataTypes.STRING,
+        type: DataTypes.JSON,
         allowNull: false
     },
     isOpen: {
