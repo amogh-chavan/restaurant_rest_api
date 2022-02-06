@@ -5,7 +5,6 @@ import { CreateRestaurantDto } from "./dto/create-restaurant.dto";
 export default class RestaurantService {
 
     async details() {
-
         const data = await restaurant.findAll();
         return new ApiResponse(200, true, data, 'success');
     }

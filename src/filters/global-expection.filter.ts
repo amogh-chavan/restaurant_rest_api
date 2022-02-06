@@ -7,5 +7,5 @@ export function globalExceptionFilter(err: any, req: Request, res: Response, nex
     if (err instanceof ApiResponse) {
         return res.status(err.code).json(err)
     }
-    res.status(500).json('Something went wrong')
+    res.status(500).send('Something went wrong')
 }
