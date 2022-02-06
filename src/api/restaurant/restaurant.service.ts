@@ -1,6 +1,5 @@
 import ApiResponse from "../../dto/api-response.dto";
 import restaurant from "../../models/restaurant";
-import { CreateRestaurantDto } from "./dto/create-restaurant.dto";
 
 export default class RestaurantService {
 
@@ -16,7 +15,16 @@ export default class RestaurantService {
     }
 
     async createRestaurant(createRestaurantDto: any) {
+        //since mysql can not store arrays we need to convert them to string
+        createRestaurantDto.cusine_types = createRestaurantDto.cusine_types.toString();
         await restaurant.create(createRestaurantDto)
+        return new ApiResponse(200, true, null, 'success')
+    }
+
+    async deleteRestaurant(id: any) {
+        const data = await restaurant.findOne({ where: { restaurant_id: id } })
+        if (!data) return ApiResponse.BadRequestException('could not find any restaurant')
+        await restaurant.destroy({ where: { restaurant_id: id } });
         return new ApiResponse(200, true, null, 'success')
     }
 

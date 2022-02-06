@@ -29,6 +29,14 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"CostType": {
+				"enum": [
+					"low",
+					"HIGH",
+					"MEDIUM"
+				],
+				"type": "string"
+			},
 			"CreateRestaurantDto": {
 				"properties": {
 					"restaurant_name": {
@@ -41,10 +49,13 @@
 						"type": "boolean"
 					},
 					"cost": {
-						"type": "string"
+						"$ref": "#/components/schemas/CostType"
 					},
 					"cusine_types": {
-						"type": "string"
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
 					},
 					"isOpen": {
 						"type": "boolean"
@@ -159,6 +170,37 @@
 						}
 					}
 				}
+			}
+		},
+		"/restaurant/delete/{id}": {
+			"delete": {
+				"operationId": "DeleteRestaurant",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Restaurant"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		},
 		"/app/healthcheck": {

@@ -11,5 +11,10 @@ export const envErrors = {
 
 export const responseErrors = {
     RES_NAME_REQUIRED: 'Restaurant name is required',
+    RES_ADD_REQUIRED: 'Restaurant address is required',
+    RES_VEG_REQUIRED: 'Veg status is for restaurant is required',
+    RES_COST_TYPE_REQUIRED: 'Cost category is required for restaurant',
+    RES_CUSINE_REQUIRED: 'Restaurant cusines is required',
+    RES_IS_OPEN_REQUIRED: 'Restaurant active status is required',
     INVALID_BODY: 'Invalid request body',
 }

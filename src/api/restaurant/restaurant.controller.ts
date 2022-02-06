@@ -1,12 +1,7 @@
-import { Body, Get, Post, Route, Tags } from "tsoa";
+import { Body, Delete, Get, Post, Route, Tags } from "tsoa";
 import { autoInjectable } from "tsyringe";
 import RestaurantService from "./restaurant.service";
-import ApiResponse from "../../dto/api-response.dto";
 import { CreateRestaurantDto } from "./dto/create-restaurant.dto";
-
-import { createRestaurantValidation } from "./validation/create-restauraant.validation";
-
-// import restaurant from "src/models/restaurant";
 
 @autoInjectable()
 @Route("/restaurant")
@@ -26,8 +21,12 @@ export default class RestaurantController {
 
     @Post("/create")
     public async createRestaurant(@Body() createRestaurantDto: CreateRestaurantDto) {
-
         return await this.restaurantService.createRestaurant(createRestaurantDto);
+    }
+
+    @Delete("/delete/:id")
+    public async deleteRestaurant(id: string) {
+        return await this.restaurantService.deleteRestaurant(id);
     }
 
 }
