@@ -3,6 +3,7 @@ import ApiResponse from "../../dto/api-response.dto";
 import restaurant from "../../models/restaurant";
 import { RestaurantFiltersDto } from "./dto/restaurant-filter.dto";
 
+
 export default class RestaurantService {
 
     async details() {
@@ -26,7 +27,8 @@ export default class RestaurantService {
 
     async filterRestaurant(restaurantFiltersDto: RestaurantFiltersDto) {
         const filterQuery = await filterQueryBuilder(restaurantFiltersDto)
-        const data = await restaurant.findAll({ where: { ...filterQuery } })
+
+        const data = await restaurant.findAll(filterQuery)
         if (!data) return ApiResponse.BadRequestException('could not find any restaurant')
         return new ApiResponse(200, true, data, 'success')
     }

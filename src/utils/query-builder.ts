@@ -1,14 +1,25 @@
+import { Sequelize } from "sequelize/dist";
 import { RestaurantFiltersDto } from "../api/restaurant/dto/restaurant-filter.dto";
-
+import { Op } from "sequelize";
 export async function filterQueryBuilder(restaurantFiltersDto: RestaurantFiltersDto) {
     let filterQuery: any = {}
-
+    let costArr: any = [];
+    let cusineArr: any = [];
     if (restaurantFiltersDto.cost !== undefined) {
-
-        filterQuery.cost = restaurantFiltersDto.cost;
+        restaurantFiltersDto.cost.forEach((element) => {
+            costArr.push(
+                {
+                    cost: { [Op.like]: `%${element}%` }
+                })
+        })
     }
     if (restaurantFiltersDto.cusine_types !== undefined) {
-        filterQuery.cusine_types = restaurantFiltersDto.cusine_types
+        restaurantFiltersDto.cusine_types.forEach((element) => {
+            cusineArr.push(
+                {
+                    cusine_types: { [Op.like]: `%${element}%` }
+                })
+        })
     }
     if (restaurantFiltersDto.isOpen !== undefined) {
         filterQuery.isOpen = restaurantFiltersDto.isOpen
@@ -17,7 +28,11 @@ export async function filterQueryBuilder(restaurantFiltersDto: RestaurantFilters
         filterQuery.veg_only = restaurantFiltersDto.veg_only
     }
 
-    console.log("only filters: ", filterQuery)
-    console.log("filter query", { where: { ...filterQuery } })
-    return filterQuery
+    const query = { where: { ...filterQuery, [Op.or]: [...costArr, ...cusineArr] } };
+
+    return query
 }
+
+
+
+// const query = { where: { ...filterQuery, [Op.or]: [{ cost: { [Op.like]: '%MEDIUM%' } }, { cost: { [Op.like]: '%LOW%' } }] } };
