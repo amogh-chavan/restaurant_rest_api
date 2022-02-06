@@ -37,6 +37,33 @@
 				],
 				"type": "string"
 			},
+			"RestaurantFiltersDto": {
+				"properties": {
+					"veg_only": {
+						"type": "boolean"
+					},
+					"cost": {
+						"$ref": "#/components/schemas/CostType"
+					},
+					"cusine_types": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"isOpen": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"veg_only",
+					"cost",
+					"cusine_types",
+					"isOpen"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"CreateRestaurantDto": {
 				"properties": {
 					"restaurant_name": {
@@ -138,6 +165,38 @@
 						}
 					}
 				]
+			}
+		},
+		"/restaurant/filter": {
+			"post": {
+				"operationId": "FilterRestaurant",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Restaurant"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RestaurantFiltersDto"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/restaurant/create": {

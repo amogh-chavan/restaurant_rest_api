@@ -14,6 +14,11 @@ export default class RestaurantService {
         return new ApiResponse(200, true, data, 'success')
     }
 
+    async filterRestaurant(restaurantFiltersDto: any) {
+        console.log(restaurantFiltersDto)
+        return new ApiResponse(200, true, null, 'success')
+    }
+
     async createRestaurant(createRestaurantDto: any) {
         //since mysql can not store arrays we need to convert them to string
         createRestaurantDto.cusine_types = createRestaurantDto.cusine_types.toString();

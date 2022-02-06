@@ -7,6 +7,7 @@ import { SetUpMiddlewares } from './config/middlewares.config';
 import sequelizeConnection from './config/db.config';
 import restaurant from './models/restaurant';
 import { globalExceptionFilter } from './filters/global-expection.filter';
+
 const app: Application = express();
 
 SetUpMiddlewares(app)
@@ -31,6 +32,7 @@ sequelizeConnection.sync().then((sync_result: any) => {
 }).catch((e: any) => { console.error(e + 'could not sequelize Connection '); })
 
 app.use(globalExceptionFilter)
+
 app.listen(envConfig.port, envConfig.server_address, () => {
     console.log(`Server is running on ${envConfig.protocol}://${envConfig.server_address}:${envConfig.port}/docs`)
 });
