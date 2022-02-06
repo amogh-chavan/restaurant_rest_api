@@ -11,14 +11,7 @@ export default class AppController {
 
     @Get("/healthcheck")
     public async healthCheck() {
-        const data = await this.appService.healthCheck()
-        return new ApiResponse(true, data, 'Hello request, Server is working fine^_^');
+        return await this.appService.healthCheck()
     }
 
-    @Post("/login")
-    public async login(@Body() body: any) {
-        const { username, password } = body;
-        const data = await this.appService.login({ username, password })
-        return new ApiResponse(true, data, 'logged in successfully');
-    }
 }

@@ -6,8 +6,6 @@ import { container } from "tsyringe";
 const AppRouterModule = express.Router();
 const controller = container.resolve(AppController);
 
-AppRouterModule.get("/app/healthcheck", async (_req, res) => res.send(await controller.healthCheck()));
-
-AppRouterModule.post("/app/login", async (_req, res) => res.status(201).send(await controller.login(_req.body)));
+AppRouterModule.get("/app/healthcheck", async (_req, res, next) => next(await controller.healthCheck()));
 
 export default AppRouterModule;

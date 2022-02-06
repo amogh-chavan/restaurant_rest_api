@@ -38,5 +38,5 @@ const envConfig = {
         driver: envVars.DB_DRIVER
     }
 }
-console.log(envConfig)
+
 export default envConfig;

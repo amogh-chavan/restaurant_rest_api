@@ -8,6 +8,10 @@
 		"schemas": {
 			"ApiResponse": {
 				"properties": {
+					"code": {
+						"type": "number",
+						"format": "double"
+					},
 					"success": {
 						"type": "boolean"
 					},
@@ -17,9 +21,42 @@
 					"data": {}
 				},
 				"required": [
+					"code",
 					"success",
 					"message",
 					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateRestaurantDto": {
+				"properties": {
+					"restaurant_name": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"veg_only": {
+						"type": "boolean"
+					},
+					"cost": {
+						"type": "string"
+					},
+					"cusine_types": {
+						"type": "string"
+					},
+					"isOpen": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"restaurant_name",
+					"address",
+					"veg_only",
+					"cost",
+					"cusine_types",
+					"isOpen"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -61,6 +98,69 @@
 				"parameters": []
 			}
 		},
+		"/restaurant/details/{id}": {
+			"get": {
+				"operationId": "FindOneById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Restaurant"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/restaurant/create": {
+			"post": {
+				"operationId": "CreateRestaurant",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Restaurant"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateRestaurantDto"
+							}
+						}
+					}
+				}
+			}
+		},
 		"/app/healthcheck": {
 			"get": {
 				"operationId": "HealthCheck",
@@ -81,36 +181,6 @@
 				],
 				"security": [],
 				"parameters": []
-			}
-		},
-		"/app/login": {
-			"post": {
-				"operationId": "Login",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ApiResponse"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Health Check Api"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {}
-						}
-					}
-				}
 			}
 		}
 	},

@@ -8,3 +8,8 @@ export const envErrors = {
     SQL_HOST_REQUIRED: 'Sql host name required',
     DB_DRIVER_REQUIRED: 'database driver name required'
 }
+
+export const responseErrors = {
+    RES_NAME_REQUIRED: 'Restaurant name is required',
+    INVALID_BODY: 'Invalid request body',
+}

@@ -1,24 +1,13 @@
-import { SQLconnection } from "./config/mysql.config"
+// import { SQLconnection } from "./config/mysql.config"
+
+import ApiResponse from "./dto/api-response.dto";
 
 export default class AppService {
 
     async healthCheck() {
-        return 'success response'
+        return new ApiResponse(200, true, null, 'Hello request, Server is working fine^_^');
+        // return ApiResponse.BadRequestException();
+        // return 'success response'
     }
 
-    async login(loginDto: any) {
-        if (loginDto.username && loginDto.password) {
-            try {
-                await SQLconnection.promise().query(`INSERT INTO USER VALUES('${loginDto.username}','${loginDto.password}')`)
-            }
-            catch (e) {
-                console.log(e)
-            }
-            return 'Hello ' + loginDto.username + " your password is " + loginDto.password
-        }
-        else {
-            return 'Incompelete creds'
-        }
-
-    }
 }

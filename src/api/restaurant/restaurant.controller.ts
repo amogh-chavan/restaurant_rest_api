@@ -1,7 +1,11 @@
-import { Get, Route, Tags } from "tsoa";
+import { Body, Get, Post, Route, Tags } from "tsoa";
 import { autoInjectable } from "tsyringe";
 import RestaurantService from "./restaurant.service";
 import ApiResponse from "../../dto/api-response.dto";
+import { validateRequest } from "../../pipes/validation.pipe";
+import { CreateRestaurantDto } from "./dto/create-restaurant.dto";
+
+// import restaurant from "src/models/restaurant";
 
 @autoInjectable()
 @Route("/restaurant")
@@ -11,8 +15,18 @@ export default class RestaurantController {
 
     @Get("/details")
     public async getDetails() {
-        const data = await this.restaurantService.details();
-        return new ApiResponse(true, data, 'success');
+        return await this.restaurantService.details();
+    }
+
+    @Get("/details/:id")
+    public async findOneById(id: string) {
+        return await this.restaurantService.findOneById(id);
+    }
+
+    @Post("/create")
+    public async createRestaurant(@Body() createRestaurantDto: CreateRestaurantDto) {
+        return await this.restaurantService.createRestaurant(createRestaurantDto);
+
     }
 
 }

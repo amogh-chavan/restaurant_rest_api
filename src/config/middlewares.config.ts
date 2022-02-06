@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import morgan from "morgan";
 import bodyParser from 'body-parser';
+import { globalExceptionFilter } from '../filters/global-expection.filter';
 
 
 export function SetUpMiddlewares(app: Application) {
@@ -8,7 +9,7 @@ export function SetUpMiddlewares(app: Application) {
         express.json(),
         morgan("combined"),
         express.static("public"),
-        bodyParser.urlencoded({ extended: true }),
-        bodyParser.json()
+        bodyParser.urlencoded({ extended: false }),
+        bodyParser.json(),
     )
 }
