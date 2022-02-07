@@ -35,7 +35,7 @@ export async function filterQueryBuilder(restaurantFiltersDto: RestaurantFilters
         query = { where: { ...filterQuery } };
     }
 
-    console.log("query", query)
+    // console.log("query", query)
     return query
 }
 
