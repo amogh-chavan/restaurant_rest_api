@@ -17,4 +17,13 @@ export const responseErrors = {
     RES_CUSINE_REQUIRED: 'Restaurant cusines is required',
     RES_IS_OPEN_REQUIRED: 'Restaurant active status is required',
     INVALID_BODY: 'Invalid request body',
+    INVALID_ID: 'Please enter a valid Id',
+    RES_NAME_EXISTS: 'restaurant with same name already existis',
+    RES_NOT_FOUND: 'could not find any restaurant',
+
+}
+
+export const responseMessage = {
+    SUCC_UPDTAED: 'successfully updated restaurant details',
+    SUCC_CREATED: 'successfully uploaded restaurant details'
 }

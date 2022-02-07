@@ -1,9 +1,10 @@
-import { Body, Delete, Get, Post, Query, Route, Tags } from "tsoa";
+import { Body, Delete, Get, Patch, Post, Query, Route, Tags } from "tsoa";
 import { autoInjectable } from "tsyringe";
 import RestaurantService from "./restaurant.service";
 import { CreateRestaurantDto } from "./dto/create-restaurant.dto";
 import { RestaurantFiltersDto } from "./dto/restaurant-filter.dto";
 import { CostType } from "../../enums/cost-type.enum";
+import { UpdateRestaurantDto } from "./dto/update-restaurant.dto";
 
 @autoInjectable()
 @Route("/restaurant")
@@ -35,5 +36,12 @@ export default class RestaurantController {
     public async deleteRestaurant(id: string) {
         return await this.restaurantService.deleteRestaurant(+id);
     }
+
+    @Patch("/update/:id")
+    public async updateRestaurant(id: string, @Body() updateRestaurantDto: UpdateRestaurantDto) {
+        return await this.restaurantService.updateRestaurant(+id, updateRestaurantDto);
+    }
+
+
 
 }

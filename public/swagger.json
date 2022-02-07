@@ -101,6 +101,41 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"UpdateRestaurantDto": {
+				"properties": {
+					"restaurant_name": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"veg_only": {
+						"type": "boolean"
+					},
+					"cost": {
+						"$ref": "#/components/schemas/CostType"
+					},
+					"cusine_types": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"isOpen": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"restaurant_name",
+					"address",
+					"veg_only",
+					"cost",
+					"cusine_types",
+					"isOpen"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -263,6 +298,47 @@
 						}
 					}
 				]
+			}
+		},
+		"/restaurant/update/{id}": {
+			"patch": {
+				"operationId": "UpdateRestaurant",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Restaurant"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateRestaurantDto"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/app/healthcheck": {

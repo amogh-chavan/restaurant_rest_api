@@ -3,8 +3,8 @@ import { validateRequest } from "../../pipes/validation.pipe";
 import { container } from "tsyringe";
 import RestaurantController from "./restaurant.controller";
 import { createRestaurantValidation } from "./validation/create-restauraant.validation";
-import { boolean, string } from "joi";
 import { restaurantFilterValidation } from "./validation/restaurant-filter.validation";
+import { updateRestaurantValidation } from "./validation/update-restaurant.validation";
 
 const RestaurantRouterModule = express.Router();
 const controller = container.resolve(RestaurantController);
@@ -19,6 +19,7 @@ RestaurantRouterModule.post('/restaurant/create', validateRequest(createRestaura
 
 RestaurantRouterModule.delete('/restaurant/delete/:id', async (_req, res, next) => next(await controller.deleteRestaurant(_req.params.id)))
 
+RestaurantRouterModule.patch('/restaurant/update/:id', validateRequest(updateRestaurantValidation), async (_req, res, next) => next(await controller.updateRestaurant(_req.params.id, _req.body)))
 
 export default RestaurantRouterModule;
 

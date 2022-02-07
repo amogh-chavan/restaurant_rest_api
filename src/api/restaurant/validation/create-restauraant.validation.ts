@@ -26,8 +26,6 @@ export const createRestaurantValidation = Joi.object({
     }),
     cusine_types: Joi.array().required().messages({
         'any.required': responseErrors.RES_CUSINE_REQUIRED,
-        // 'array.empty': responseErrors.RES_CUSINE_REQUIRED,
-        // 'array.base': responseErrors.RES_CUSINE_REQUIRED,
     }),
     isOpen: Joi.boolean().required().messages({
         'any.required': responseErrors.RES_IS_OPEN_REQUIRED,
