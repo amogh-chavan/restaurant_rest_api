@@ -14,19 +14,9 @@ SetUpMiddlewares(app)
 SetUpRoutes(app)
 setupSwagger(app)
 
-
-
 sequelizeConnection.sync().then((sync_result: any) => {
     console.log("sequelize sync success")
-    // restaurant.create(
-    //     {
-    //         restaurant_name: 'amogh',
-    //         address: 'dombivli west char rasta near gopi mall 421202',
-    //         veg_only: true,
-    //         cost: 'LOW',
-    //         cusine_types: JSON.stringify(["south indian", "italian", "french", "north indian"]),
-    //         isOpen: true
-    //     })
+
 }).then(res => {
 
 }).catch((e: any) => { console.error(e + 'could not sequelize Connection '); })
