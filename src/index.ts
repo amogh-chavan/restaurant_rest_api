@@ -7,6 +7,7 @@ import { SetUpMiddlewares } from './config/middlewares.config';
 import sequelizeConnection from './config/db.config';
 import restaurant from './models/restaurant';
 import { globalExceptionFilter } from './filters/global-expection.filter';
+import ApiResponse from './dto/api-response.dto';
 
 const app: Application = express();
 
@@ -21,7 +22,16 @@ sequelizeConnection.sync().then((sync_result: any) => {
 
 }).catch((e: any) => { console.error(e + 'could not sequelize Connection '); })
 
+
+
+// this matches all routes and all methods i.e a centralized error handler
+app.use((req, res, next) => {
+    next(new ApiResponse(404, false, null, 'Not Found'));
+});
+
 app.use(globalExceptionFilter)
+
+
 
 app.listen(envConfig.port, envConfig.server_address, () => {
     console.log(`Server is running on ${envConfig.protocol}://${envConfig.server_address}:${envConfig.port}/docs`)

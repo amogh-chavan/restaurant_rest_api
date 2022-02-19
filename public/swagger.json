@@ -8,6 +8,15 @@
 		"schemas": {
 			"ApiResponse": {
 				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"stack": {
+						"type": "string"
+					},
 					"code": {
 						"type": "number",
 						"format": "double"
@@ -15,15 +24,13 @@
 					"success": {
 						"type": "boolean"
 					},
-					"message": {
-						"type": "string"
-					},
 					"data": {}
 				},
 				"required": [
+					"name",
+					"message",
 					"code",
 					"success",
-					"message",
 					"data"
 				],
 				"type": "object",
